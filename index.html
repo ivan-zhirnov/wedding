@@ -4419,7 +4419,7 @@
                     <div class="t-animate" data-animate-delay="0.3" data-animate-group="yes" data-animate-order="3"
                          data-animate-style="fadein">
                         <form
-                                accept-charset="UTF-8" action='https://docs.google.com/forms/d/e/1FAIpQLSdnmqmjy5rjTiad8T7WsmKkj7CzYcd-VTypWn-TXTwN6BWH7Q/formResponse' class="t-form t-form_inputs-total_3 t-form_bbonly"
+                                accept-charset="UTF-8" action='https://docs.google.com/forms/d/e/1FAIpQLSdnmqmjy5rjTiad8T7WsmKkj7CzYcd-VTypWn-TXTwN6BWH7Q/formResponse' class="t-form t-form_inputs-total_4 t-form_bbonly"
                                 id="form674002426"
                                 method='POST' name='form674002426' novalidate
                                 role="form"> <!-- @classes t-title t-text t-btn -->
@@ -5864,7 +5864,7 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
             var selectedDrinks = Array.prototype.filter.call(drinkInputs, function (input) {
                 return input.checked;
             });
-            var selectedResidence = Array.prototype.filter.call(residenceInputs, function (input) {
+            var selectedResidence = Array.prototype.find.call(residenceInputs, function (input) {
                 return input.checked;
             });
             bridgeDocument.body.innerHTML = "";
@@ -5880,8 +5880,8 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
             Array.prototype.forEach.call(selectedDrinks, function (input) {
                 appendHiddenInput("entry.1010726593", input.value);
             });
-            appendHiddenInput("entry.904678469", selectedResidence ? selectedResidence.value : "");
             appendHiddenInput("entry.904678469_sentinel", "");
+            appendHiddenInput("entry.904678469", selectedResidence ? selectedResidence.value : "");
             appendHiddenInput("fvv", "1");
             appendHiddenInput("pageHistory", "0");
             appendHiddenInput("submissionTimestamp", "-1");
