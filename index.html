@@ -222,6 +222,7 @@
         var guestNameInput = form.querySelector("input[name=\"entry.273185135\"]");
         var attendanceInputs = form.querySelectorAll("input[name=\"entry.1600480636\"]");
         var drinkInputs = form.querySelectorAll("input[name=\"entry.1010726593\"]");
+        var residenceInputs = form.querySelectorAll("input[name=\"entry.904678469\"]");
         var iframeName = "google-form-response-frame";
         var googleFormAction = "https://docs.google.com/forms/d/e/1FAIpQLSdnmqmjy5rjTiad8T7WsmKkj7CzYcd-VTypWn-TXTwN6BWH7Q/formResponse";
         var submitTimeoutId = null;
@@ -251,6 +252,13 @@
             });
         }
 
+        function hasSelectedResidence() {
+            return Array.prototype.some.call(residenceInputs, function (input) {
+                return input.checked;
+            });
+        }
+
+
         function ensureHiddenInput(name, value) {
             var input = form.querySelector("input[type=\"hidden\"][name=\"" + name + "\"]");
             if (!input) {
@@ -279,7 +287,7 @@
 
         function updateSubmitState() {
             if (!submitButton) return;
-            var isComplete = hasSelectedAttendance() && hasGuestName() && hasSelectedDrink();
+            var isComplete = hasSelectedAttendance() && hasGuestName() && hasSelectedDrink() && hasSelectedResidence();
             var isDisabled = !isComplete || isSubmitting;
             submitButton.disabled = isDisabled;
             submitButton.setAttribute("aria-disabled", isDisabled ? "true" : "false");
@@ -325,6 +333,9 @@
         Array.prototype.forEach.call(drinkInputs, function (input) {
             input.addEventListener("change", handleFieldChange);
         });
+        Array.prototype.forEach.call(residenceInputs, function (input) {
+            input.addEventListener("change", handleFieldChange);
+        });
         updateSubmitState();
         document.addEventListener("submit", function (event) {
             if (event.target !== form) {
@@ -336,7 +347,7 @@
             if (isSubmitting) {
                 return;
             }
-            if (!hasSelectedAttendance() || !hasGuestName() || !hasSelectedDrink()) {
+            if (!hasSelectedAttendance() || !hasGuestName() || !hasSelectedDrink() || !hasSelectedResidence()) {
                 updateSubmitState();
                 return;
             }
@@ -4434,7 +4445,8 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
                                     </div>
                                     <div class="t-input-block "><input name="entry.1600480636_sentinel" type="hidden"
                                                                        value="">
-                                        <div class="t-radio__wrapper"><label
+                                        <div class="t-radio__wrapper">
+                                            <label
                                                 class="t-radio__item t-radio__control t-text t-text_xs"
                                                 style=""> <input
                                                 aria-required="true"
@@ -4595,6 +4607,86 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
                                         });</script>
                                     </div>
                                     <div aria-live="polite" class="t-input-error" id="error_1555614493290"></div>
+                                </div>
+                                <div
+                                        aria-labelledby="field-title_1555614493291" class="t-input-group t-input-group_rd "
+                                        data-field-async="true" data-field-name="Проживание" data-field-radcb="cb"
+                                        data-field-type="rd" data-input-lid="1555614493291" role="group">
+                                    <div
+                                            class="t-input-title t-descr t-descr_md"
+                                            data-redactor-toolbar="no" field="li_title__1555614493291"
+                                            id="field-title_1555614493291"
+                                            style="color:;font-weight:500;font-family:'Open Sans';">Планируете ли вы остаться с ночёвкой после свадьбы?
+                                    </div>
+                                    <div class="t-input-block "><input name="entry.904678469_sentinel" type="hidden"
+                                                                       value="">
+                                        <div class="t-radio__wrapper">
+                                            <label
+                                                    class="t-radio__item t-radio__control t-text t-text_xs"
+                                                    style=""> <input
+                                                    aria-required="true"
+                                                    class="t-radio js-tilda-rule"
+                                                    data-tilda-req="1"
+                                                    name="entry.904678469" type="radio" value="Да, хотел(а) бы остановиться в «Артиленде»">
+                                                <div
+                                                        class="t-radio__indicator"></div>
+                                                <span>Да, хотел(а) бы остановиться в «Артиленде»</span> </label>
+                                            <label
+                                                class="t-radio__item t-radio__control t-text t-text_xs"
+                                                style=""> <input
+                                                aria-required="true"
+                                                class="t-radio js-tilda-rule"
+                                                data-tilda-req="1"
+                                                name="entry.904678469" type="radio" value="Да, планирую остановиться неподалёку">
+                                            <div
+                                                    class="t-radio__indicator"></div>
+                                            <span>Да, планирую остановиться неподалёку</span> </label>
+                                            <label
+                                                    class="t-radio__item t-radio__control t-text t-text_xs"
+                                                    style=""> <input
+                                                    aria-required="true"
+                                                    class="t-radio js-tilda-rule"
+                                                    data-tilda-req="1"
+                                                    name="entry.904678469" type="radio" value="Нет, поеду домой в тот же день">
+                                                <div
+                                                        class="t-radio__indicator"></div>
+                                                <span>Нет, поеду домой в тот же день»</span> </label>
+                                            <label
+                                                    class="t-radio__item t-radio__control t-text t-text_xs"
+                                                    style=""> <input
+                                                    aria-required="true"
+                                                    class="t-radio js-tilda-rule"
+                                                    data-tilda-req="1"
+                                                    name="entry.904678469" type="radio" value="Пока не знаю">
+                                                <div
+                                                        class="t-radio__indicator"></div>
+                                                <span>Пока не знаю</span> </label>
+                                            <div
+                                                    class="t-input-subtitle t-descr t-descr_xxs t-opacity_70"
+                                                    data-redactor-toolbar="no"
+                                                    field="li_subtitle__1555614493291"
+                                                    style="color:;">Сейчас оформить проживание можно через нас, поэтому если вы рассматриваете вариант остаться, лучше напишите, пожалуйста, в личные сообщения.
+                                                На данном этапе предоплата не требуется, все детали расскажем чуть позже.
+                                            </div>
+                                            <script>t_onReady(function () {
+                                                t_onFuncLoad('t_loadJsFile', function () {
+                                                    t_loadJsFile('https://static.tildacdn.com/js/tilda-variant-select-1.0.min.js', function () {
+                                                        t_onFuncLoad('t_input_radiobuttons_init', function () {
+                                                            try {
+                                                                t_input_radiobuttons_init('674002426', '1495722692748');
+                                                            } catch (e) {
+                                                                console.log(e)
+                                                            }
+                                                        })
+                                                    })
+                                                });
+                                            });</script>
+                                            <style>#rec674002426 .t-radio__indicator:after {
+                                                background:;
+                                            }</style>
+                                        </div>
+                                    </div>
+                                    <div aria-live="polite" class="t-input-error" id="error_1555614493291"></div>
                                 </div>
                                 <div class="t-form__errorbox-middle"> <!--noindex-->
                                     <div
@@ -5489,6 +5581,7 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
     var guestNameInput = form.querySelector("input[name=\"entry.273185135\"]");
     var attendanceInputs = form.querySelectorAll("input[name=\"entry.1600480636\"]");
     var drinkInputs = form.querySelectorAll("input[name=\"entry.1010726593\"]");
+    var residenceInputs = form.querySelectorAll("input[name=\"entry.904678469\"]");
     var iframeName = "google-form-response-frame";
     var iframe = document.querySelector("iframe[name=\"" + iframeName + "\"]");
     if (!iframe) {
@@ -5515,9 +5608,15 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
         });
     }
 
+    function hasSelectedResidence() {
+        return Array.prototype.some.call(residenceInputs, function (input) {
+            return input.checked;
+        });
+    }
+
     function updateSubmitState() {
         if (!submitButton) return;
-        var isComplete = hasSelectedAttendance() && hasGuestName() && hasSelectedDrink();
+        var isComplete = hasSelectedAttendance() && hasGuestName() && hasSelectedDrink() && hasSelectedResidence();
         submitButton.disabled = !isComplete;
         submitButton.setAttribute("aria-disabled", isComplete ? "false" : "true");
     }
@@ -5558,6 +5657,12 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
             updateSubmitState();
         });
     });
+    Array.prototype.forEach.call(residenceInputs, function (input) {
+        input.addEventListener("change", function () {
+            hideSuccessMessage();
+            updateSubmitState();
+        });
+    });
     updateSubmitState();
     form.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -5570,6 +5675,9 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
             return input.checked;
         });
         var selectedDrinks = Array.prototype.filter.call(drinkInputs, function (input) {
+            return input.checked;
+        });
+        var selectedResidence = Array.prototype.find.call(residenceInputs, function (input) {
             return input.checked;
         });
         var submitForm = document.createElement("form");
@@ -5585,6 +5693,8 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
         Array.prototype.forEach.call(selectedDrinks, function (input) {
             appendHiddenInput(submitForm, "entry.1010726593", input.value);
         });
+        appendHiddenInput(submitForm, "entry.904678469_sentinel", "");
+        appendHiddenInput(submitForm, "entry.904678469", selectedResidence ? selectedResidence.value : "");
         appendHiddenInput(submitForm, "fvv", "1");
         appendHiddenInput(submitForm, "pageHistory", "0");
         appendHiddenInput(submitForm, "submissionTimestamp", "0");
@@ -5615,6 +5725,7 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
         var guestNameInput = form.querySelector('input[name="entry.273185135"]');
         var attendanceInputs = form.querySelectorAll('input[name="entry.1600480636"]');
         var drinkInputs = form.querySelectorAll('input[name="entry.1010726593"]');
+        var residenceInputs = form.querySelectorAll('input[name="entry.904678469"]');
         var submitTimeoutId = 0;
         var isSubmitting = false;
         var awaitingResponse = false;
@@ -5676,6 +5787,12 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
             });
         }
 
+        function hasSelectedResidence() {
+            return Array.prototype.some.call(residenceInputs, function (input) {
+                return input.checked;
+            });
+        }
+
         function hideMessage() {
             if (successBox) {
                 successBox.style.display = "none";
@@ -5695,7 +5812,7 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
             if (!submitButton) {
                 return;
             }
-            var isComplete = hasSelectedAttendance() && hasGuestName() && hasSelectedDrink();
+            var isComplete = hasSelectedAttendance() && hasGuestName() && hasSelectedDrink() && hasSelectedResidence();
             var isDisabled = !isComplete || isSubmitting;
             submitButton.disabled = isDisabled;
             submitButton.setAttribute("aria-disabled", isDisabled ? "true" : "false");
@@ -5747,6 +5864,9 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
             var selectedDrinks = Array.prototype.filter.call(drinkInputs, function (input) {
                 return input.checked;
             });
+            var selectedResidence = Array.prototype.filter.call(residenceInputs, function (input) {
+                return input.checked;
+            });
             bridgeDocument.body.innerHTML = "";
             submitForm.action = googleFormAction;
             submitForm.method = "POST";
@@ -5760,6 +5880,8 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
             Array.prototype.forEach.call(selectedDrinks, function (input) {
                 appendHiddenInput("entry.1010726593", input.value);
             });
+            appendHiddenInput("entry.904678469", selectedResidence ? selectedResidence.value : "");
+            appendHiddenInput("entry.904678469_sentinel", "");
             appendHiddenInput("fvv", "1");
             appendHiddenInput("pageHistory", "0");
             appendHiddenInput("submissionTimestamp", "-1");
@@ -5782,6 +5904,9 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
         Array.prototype.forEach.call(drinkInputs, function (input) {
             input.addEventListener("change", handleFieldChange);
         });
+        Array.prototype.forEach.call(residenceInputs, function (input) {
+            input.addEventListener("change", handleFieldChange);
+        });
         iframe.addEventListener("load", function () {
             if (!awaitingResponse) {
                 return;
@@ -5800,7 +5925,7 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
             if (isSubmitting) {
                 return;
             }
-            if (!hasSelectedAttendance() || !hasGuestName() || !hasSelectedDrink()) {
+            if (!hasSelectedAttendance() || !hasGuestName() || !hasSelectedDrink() || !hasSelectedResidence()) {
                 updateSubmitState();
                 return;
             }

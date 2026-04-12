@@ -62,11 +62,13 @@ function buildRsvpPayload(form) {
   const attendance = formData.get("attendance") || "";
   const guestName = formData.get("guestName") || "";
   const drinks = formData.getAll("drinks");
+  const residence = formData.get("residence") || "";
 
   return {
     attendance,
     guestName,
     drinks,
+    residence
   };
 }
 
@@ -79,6 +81,7 @@ function formatRsvpMessage(payload) {
     `Имя: ${payload.guestName}`,
     `Присутствие: ${payload.attendance}`,
     `Напитки: ${drinks}`,
+    `Проживание: ${payload.residence}`
   ].join("\n");
 }
 
