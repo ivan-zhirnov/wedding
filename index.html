@@ -210,8 +210,55 @@
 
         function getCanonicalAction(action) {
             var match = String(action ||\"\").match(googleFormResponseRe);if(!match){return\"\";}return\"https://docs.google.com/forms/d/e/\"+match[1]+\"/formResponse\";}HTMLFormElement.prototype.submit=function(){var form=this;var canonicalAction=getCanonicalAction(form&&form.action);if(!canonicalAction||typeof fetch!==\"function\"||typeof FormData!==\"function\"||typeof URLSearchParams!==\"function\"){return nativeSubmit.call(form);}var payload=new URLSearchParams(new FormData(form));var iframe=form.target?document.querySelector('iframe[name=\"'+form.target+'\"]'):null;var beaconSent=false;try{if(navigator&&typeof navigator.sendBeacon===\"function\"){var beaconBody=new Blob([payload.toString()],{type:\"application/x-www-form-urlencoded;charset=UTF-8\"});beaconSent=navigator.sendBeacon(canonicalAction,beaconBody);}}catch(error){console.error(\"Could not send RSVP with sendBeacon:\",error);}if(beaconSent){if(iframe&&typeof iframe.onload===\"function\"){window.setTimeout(function(){iframe.onload();},250);}return;}fetch(canonicalAction,{method:\"POST\",mode:\"no-cors\",credentials:\"omit\",keepalive:true,headers:{\"Content-Type\":\"application/x-www-form-urlencoded;charset=UTF-8\"},body:payload.toString()}).then(function(){if(iframe&&typeof iframe.onload===\"function\"){iframe.onload();}}).catch(function(error){console.error(\"Could not submit form to Google Forms:\",error);});};HTMLFormElement.prototype.submit.__googleFormsPatchApplied=true;})();</script>
-    <style>#rec674002426 .js-successbox[data-state="error"] {
-        color: #b42318;
+    <style>#rec674002426 .js-successbox {
+        margin: 0 0 12px;
+        padding: 28px 30px;
+        border: 1px solid rgba(100, 84, 49, 0.16);
+        border-radius: 32px;
+        background: linear-gradient(135deg, rgba(255, 252, 245, 0.98), rgba(242, 236, 223, 0.94));
+        box-shadow: 0 20px 48px rgba(68, 53, 28, 0.12);
+        color: #31281f;
+        font-family: 'Open Sans', sans-serif;
+        line-height: 1.7;
+    }
+
+    #rec674002426 .js-successbox[data-state="success"] {
+        border-color: rgba(169, 185, 170, 0.6);
+        background: radial-gradient(circle at top right, rgba(169, 185, 170, 0.22), transparent 34%),
+        linear-gradient(135deg, rgba(255, 252, 245, 0.98), rgba(242, 236, 223, 0.94));
+    }
+
+    #rec674002426 .js-successbox[data-state="success"]::before {
+        content: "Ответ получен";
+        display: block;
+        margin-bottom: 10px;
+        color: #9b7428;
+        font-family: 'Playfair Display', serif;
+        font-size: 30px;
+        line-height: 1.1;
+    }
+
+    #rec674002426 .js-successbox[data-state="success"] ~ .t-form__inputsbox,
+    #rec674002426 .js-successbox[data-state="success"] ~ .t-form__errorbox-bottom {
+        display: none;
+    }
+
+    #rec674002426 .js-successbox[data-state="error"] {
+        border-color: rgba(180, 35, 24, 0.28);
+        background: linear-gradient(135deg, rgba(255, 250, 249, 0.98), rgba(251, 240, 238, 0.94));
+        box-shadow: none;
+        color: #8f2d24;
+    }
+
+    @media screen and (max-width: 640px) {
+        #rec674002426 .js-successbox {
+            padding: 22px 20px;
+            border-radius: 24px;
+        }
+
+        #rec674002426 .js-successbox[data-state="success"]::before {
+            font-size: 24px;
+        }
     }</style>
     <script>t_onReady(function () {
         var form = document.getElementById("form674002426");
@@ -5624,6 +5671,7 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
     function hideSuccessMessage() {
         if (successBox) {
             successBox.style.display = "none";
+            successBox.removeAttribute("data-state");
         }
     }
 
@@ -5705,6 +5753,7 @@ t-form__inputsbox_vertical-form t-form__inputsbox_inrow ">
         updateSubmitState();
         if (successBox) {
             successBox.textContent = "Спасибо за Ваши ответы! Если что-то изменится, пожалуйста, сообщите нам!";
+            successBox.dataset.state = "success";
             successBox.style.display = "block";
         }
     }, true);
